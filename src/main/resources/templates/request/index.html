@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{~/css/global.css}">
+    <title>GetFretes</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1>GetFretes</h1>
+        <div class="login-info">
+            <span sec:authentication="principal.name"></span>
+            <a href="/logout">
+                <span class="material-icons">logout</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="toolbar">
+        <a class="button" href="/request/new" sec:authorize-url="POST /request">Criar Pedido</a>
+    </div>
+
+    <div class="alert success" role="alert" th:if="${message != null}" >
+        <span th:text="${message}"></span>
+    </div>
+
+    <hr>
+
+    <main class="flexColumn">
+        
+        <p th:text="'Página: ' + ${requests.number} + '/' + ${requests.totalPages}|"></p>
+
+        <div class="flexSpaceAround title">
+            <p class="sizeDefault">Origem</p>
+            <p class="sizeDefault">Destino</p>
+            <p class="sizeDefault">Status</p>
+            <p class="sizeDefault">Mudanças</p>
+        </div>
+
+        <div class="card animated" th:each="request : ${requests}">
+            <h2 class="sizeDefault" th:text="${request.userClient.addressList[0].state.initials}"></h2>
+            <h2 class="sizeDefault" th:text="${request.address.state.initials}"></h2>
+            <h2 class="sizeDefault" th:text="${request.setCurrentStatus()}"></h2>
+            <!-- <a>
+                <span class="material-icons">eye-arrow-right</span>
+            </a> -->
+            <div class="sizeDefualt actions">
+                <a th:href="${'/request/delete/' + request.id}" sec:authorize="PermitAll()">
+                    <span class="material-icons">delete</span>
+                </a>
+                <a th:href="${'/request/' + request.id}"  sec:authorize="PermitAll()">
+                    <span class="material-icons">edit</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div class = "flexCenter">
+        <a class="geral" th:if="${requests.number>0}" th:href="${'/request?page=' + (requests.number-1)}">Anterior</a>
+        <a class="geral" th:if="${requests.totalPages>requests.number}" th:href="${'/request?page=' + (requests.number+1)}">Proxima</a>
+    </div>
+
+</body>
+
+</html>

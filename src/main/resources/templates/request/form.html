@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{~/css/global.css}">
+    <title>GetFretes</title>
+</head>
+
+<body>
+
+    <h1>Get Fretes</h1>
+
+    <hr>
+
+    <div class="card lg">
+        <form action="/request" method="POST" class="vertical-form" th:object="${request}">
+            
+            <p class="hidden noMargin" th:text="'ID: '+*{id}"></p>
+
+            <label for="clientName" class="hide">Nome do solicitante</label>
+            <input placeholder="Nome do solicitante" type="text" id="clientName" th:field="*{userClient.name}" th:classappend="${#fields.hasErrors('userClient.name')}?invalid">
+            <span th:errors="*{userClient.name}"></span>
+
+            <label for="transporterName" class="hide">Nome do transportador</label>
+            <input placeholder="Nome do transportador" type="text" id="transporterName" th:field="*{userTransporter.name}" th:classappend="${#fields.hasErrors('userTransporter.name')}?invalid">
+            <span th:errors="*{userTransporter.name}"></span>
+
+            <label for="addressState" class="hide">Estado da entrega</label>
+            <input placeholder="Estado da entrega" type="text" id="addressState" th:field="*{address.state.initials}" th:classappend="${#fields.hasErrors('address.state.initials')}?invalid">
+            <span th:errors="*{address.state.initials}"></span>
+
+            <label for="addressStreet" class="hide">Estado da entrega</label>
+            <input placeholder="Endereço" type="text" id="addressStreet" th:field="*{address.street}" th:classappend="${#fields.hasErrors('address.street')}?invalid">
+            <span th:errors="*{address.street}"></span>
+
+            <label for="freightFactor" class="hide">Estado da entrega</label>
+            <input placeholder="Multiplicador" type="text" id="freightFactor" th:field="*{factor.value}" th:classappend="${#fields.hasErrors('factor.value')}?invalid">
+            <span th:errors="*{factor.value}"></span>
+
+            <label for="freightValue" class="hide">Estado da entrega</label>
+            <input placeholder="Valor do Frete" type="text" id="freightValue" th:field="*{freightValue}" th:classappend="${#fields.hasErrors('freightValue')}?invalid">
+            <span th:errors="*{freightValue}"></span>
+
+            <div class="buttons">
+                <button class="button default" hef="request/index">cancelar</button>
+                <!-- <input class="button" type="submit" th:value="${task.id == null}?cadastrar:alterar" /> -->
+                <input class="button" type="submit" />
+            </div>
+    
+        </form>
+        
+
+    </div>
+
+</body>
+
+</html>

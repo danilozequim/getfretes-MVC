@@ -1,0 +1,304 @@
+input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+    margin-bottom: 1.5rem;
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+  
+  input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+  }
+  
+  input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+  
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+:root{
+    --bg: #272B30;
+    --primary: #F06;
+    --bg-grad: linear-gradient(270deg, rgba(21, 26, 31, 0.2) 0%, rgba(139, 142, 145, 0.2) 100%);
+    --text-color: #FFF;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+}
+
+::-webkit-scrollbar-thumb { background-color: #F066;}
+::-webkit-scrollbar { width: .5rem;}
+::-webkit-scrollbar-track {background-color: var(--bg);}
+
+body{
+    background-color: var(--bg);
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    font-size: 10px;
+}
+
+h1{
+    font-size: 2.4rem;
+    margin: 1rem;
+}
+
+h2{
+    font-size: 1.2rem;
+}
+
+a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.toolbar{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.buttons .button {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.button {
+    background: var(--primary);
+    box-shadow: 0px 0px 6px var(--primary);
+    border-radius: 5px;
+    color: var(--bg);
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.button.cancel {
+    background: var(--bg);
+    box-shadow: none;
+    color: var(--text-color);
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width: 270px;
+    height: 300px;
+    margin: 2rem;
+    background: var(--bg-grad);
+    border: 1px solid #333333;
+    box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+}
+
+.card.animated{
+    cursor: pointer AuthorizationFilter;
+}
+
+.card.animated:hover{
+    box-shadow: 30px 30px 40px rgba(0, 0, 0, 0.5);
+    transform:translateY(-6px);
+}
+
+.card.lg{
+    width: 370px;
+    height: 400px;
+}
+
+.status {
+    position: relative;
+
+}
+
+.status svg{
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.status circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #19191966;
+    stroke-width: 10px;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+}
+
+.status circle:nth-child(2) {
+    stroke-dasharray: 440;
+    stroke-dashoffset: calc(440 - (440 * 50) / 100 );
+    stroke: var(--primary);
+    filter: drop-shadow(0px 0px 3px var(--primary));
+}
+
+.status .number{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2rem;
+}
+.status .number h2{
+    font-size: 2rem;
+    filter: opacity(.5);
+}
+
+.score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.score span {
+    font-size: 1rem;
+    margin-left: .5rem;
+}
+
+.score span:nth-child(1) {
+    color: var(--primary);
+}
+
+.vertical-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.hide {
+    display: none;
+}
+
+input[type=text], textarea {
+    background: var(--bg);
+    border: 1px solid #545D68;
+    box-shadow: inset -4px -4px 4px rgba(103, 103, 103, 0.25), inset 3px 3px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    padding: .8rem;
+    color: var(--text-color);
+    margin-top: 1rem;
+}
+
+textarea{
+	resize: vertical;
+	height: 5rem;
+	width: 20rem;
+    font-family: 'Poppins', sans-serif;
+    max-height: 12rem;
+}
+
+#labelscore{
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+.alert {
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 400px;
+    font-size: 1rem;
+}
+
+.alert.success {
+    background-color: #2ecc71;
+}
+
+.invalid {
+    border: solid 1px var(--primary) !important;
+}
+  /* Special styling for WebKit/Blink */
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #F06;
+    cursor: pointer;
+    margin-top: -8px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  }
+  
+  /* All the same stuff for Firefox */
+  input[type=range]::-moz-range-thumb {
+    border: 1px solid #000000;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #F06;
+    cursor: pointer;
+  }
+  
+  /* All the same stuff for IE */
+  input[type=range]::-ms-thumb {
+    border: 1px solid #000000;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    background: #F06;
+    cursor: pointer;
+  }
+  
+  input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: linear-gradient(270deg, #F06 0%, rgba(31, 31, 31, 0) 141.1%);
+    filter: drop-shadow(-4px -4px 10px rgba(111, 111, 111, 0.25)), drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.25));
+    border-radius: 100px;
+  }
+  
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: linear-gradient(270deg, #F06 0%, rgba(31, 31, 31, 0) 141.1%);
+  }
+  
+  input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: linear-gradient(270deg, #F06 0%, rgba(31, 31, 31, 0) 141.1%);
+    filter: drop-shadow(-4px -4px 10px rgba(111, 111, 111, 0.25)), drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.25));
+    border-radius: 100px;
+  }
+  
+  input[type=range]::-ms-track {
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    color: transparent;
+  }
