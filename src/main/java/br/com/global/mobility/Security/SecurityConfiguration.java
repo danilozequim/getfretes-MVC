@@ -17,25 +17,29 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests() 
 
                 // Usuários
-                // .antMatchers(HttpMethod.GET, "/api/usuario/**").authenticated()
-                // .antMatchers(HttpMethod.POST, "/api/usuario/**").authenticated()
-                // .antMatchers(HttpMethod.PUT, "/api/usuario/**").authenticated()
-                // .antMatchers(HttpMethod.DELETE, "/api/usuario/**").hasRole("ADMIN")
+                // .antMatchers(HttpMethod.GET, "/**").permitAll()
+                // .antMatchers(HttpMethod.POST, "/api/request/**").authenticated()
+                // .antMatchers(HttpMethod.PUT, "/api/request/**").authenticated()
+                // .antMatchers(HttpMethod.POST, "/request/**").authenticated()
+                // .antMatchers(HttpMethod.PUT, "/request/**").authenticated()
 
-                // web
-                // .antMatchers(HttpMethod.GET, "/api/**").authenticated()
-                // .antMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
-                // .antMatchers(HttpMethod.PUT, "/api/**").hasRole("ADMIN")
-                // .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
-                
+                // .antMatchers(HttpMethod.POST, "/**").hasRole("ADMIN")
+                // .antMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
+                // .antMatchers(HttpMethod.PUT, "/**").permitAll()
+                // .antMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
+
+                // WEB
+                // .antMatchers(HttpMethod.POST, "/task").authenticated()
+                // .antMatchers("/css/**").permitAll()
+
                 // Others
-                // .anyRequest().denyAll()
                 .anyRequest().permitAll()
+                // .anyRequest().permitAll()
 
             .and()
                 .csrf().disable()
-                .headers().frameOptions().disable()
-            .and()
+                // .headers().frameOptions().disable()
+            // .and()
                 .formLogin()
         ;        
         return http.build();

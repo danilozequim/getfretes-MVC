@@ -18,19 +18,19 @@
     <div class="card lg">
         <form action="/request" method="POST" class="vertical-form" th:object="${request}">
             
-            <p th:if="*{id != null}" class="hidden noMargin" th:text="'ID: '+ *{id}"></p>
+            <input th:if="*{id != null}" th:field="*{id}" id="id">
 
             <label for="clientName" class="hide">Nome do solicitante</label>
-            <input placeholder="Nome do solicitante" type="text" id="clientName" th:field="*{userClient.name}" th:classappend="${#fields.hasErrors('userClient.name')}?invalid">
+            <input readonly placeholder="Nome do solicitante" type="text" id="clientName" th:field="*{userClient.name}" th:classappend="${#fields.hasErrors('userClient.name')}?invalid">
             <span th:errors="*{userClient.name}"></span>
 
             <label for="transporterName" class="hide">Nome do transportador</label>
-            <input placeholder="Nome do transportador" type="text" id="transporterName" th:field="*{userTransporter.name}" th:classappend="${#fields.hasErrors('userTransporter.name')}?invalid">
+            <input readonly placeholder="Nome do transportador" type="text" id="transporterName" th:field="*{userTransporter.name}" th:classappend="${#fields.hasErrors('userTransporter.name')}?invalid">
             <span th:errors="*{userTransporter.name}"></span>
 
             <br>
             
-            <label for="originState">Estado de orgibem</label>
+            <label for="originState">Estado de origem</label>
             <select th:field="*{originState}" id="originState">
                 <option th:each="state : ${states}" th:text="${state.initials}" th:value="${state.initials}"></option>
             </select>
@@ -57,13 +57,13 @@
             <br>
 
             <label for="itemQtd" class="hide">Estado da entrega</label>
-            <input placeholder="Quantidade" type="number" id="itemQtd" th:field="*{requestItemList[0].value}" th:classappend="${#fields.hasErrors('requestItemList[0].value')}?invalid">
+            <input placeholder="Quantidade" type="number" step="0.1" id="itemQtd" th:field="*{requestItemList[0].value}" th:classappend="${#fields.hasErrors('requestItemList[0].value')}?invalid">
             <span th:errors="*{requestItemList[0].value}"></span>
 
             <br>
-            
+
             <label for="freightFactor" class="hide">Estado da entrega</label>
-            <input readonly th:if="*{factor != null}" placeholder="Multiplicador" type="number" id="freightFactor" th:field="*{factor.value}" th:classappend="${#fields.hasErrors('factor.value')}?invalid">
+            <input readonly th:if="*{factor != null}" placeholder="Multiplicador" type="text" step="0.1" id="freightFactor" th:field="*{factor.value}" th:classappend="${#fields.hasErrors('factor.value')}?invalid">
             <span th:errors="*{factor.value}"></span>
 
             <!-- <label for="freightValue" class="hide">Estado da entrega</label>

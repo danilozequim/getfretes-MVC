@@ -1,6 +1,5 @@
 package br.com.global.mobility.Controller.Web;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,14 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.global.mobility.Enumerator.EN_User;
 import br.com.global.mobility.Model.Address;
-import br.com.global.mobility.Model.FreightFactor;
 import br.com.global.mobility.Model.Item;
 import br.com.global.mobility.Model.Request;
 import br.com.global.mobility.Model.RequestItem;
 import br.com.global.mobility.Model.State;
-import br.com.global.mobility.Model.User;
 import br.com.global.mobility.Service.FreightFactorService;
 import br.com.global.mobility.Service.ItemService;
 import br.com.global.mobility.Service.RequestItemService;
@@ -87,53 +83,45 @@ public class RequestWebController {
 
         System.out.println(request.toString());
 
-        if(request.getId() == null){
+        if(request.getId() != null){
 
-            if(request.getUserClient().getId() == null){
-                User user = request.getUserClient();
-                user.setType(EN_User.CLIENTE);
-                request.addUser(user);
+            Request requestOld = service.findById(request.getId()).get();
+
+            if(!request.getAddress().getStreet().equals(requestOld.getAddress().getStreet())){
+                requestOld.getAddress().setStreet(request.getAddress().getStreet());
             }
-
-            if(request.getUserTransporter().getId() == null){
-                User user = request.getUserTransporter();
-                user.setType(EN_User.PRESTADOR);
-                request.addUser(user);
+    
+            if(request.getAddress().getStreetNumber() != requestOld.getAddress().getStreetNumber()){
+                requestOld.getAddress().setStreetNumber(request.getAddress().getStreetNumber());
             }
-
-            if(request.getAddress().getId() == null){
-                State state = stateService.findByInitials(request.getAddress().getState().getInitials()).get();
-                Address address = request.getAddress();
+    
+            if(request.getAddress().getState().getId() != requestOld.getAddress().getState().getId()){
+                State state = stateService.findById(request.getAddress().getState().getId()).get();
+                Address address = requestOld.getAddress();
                 address.addState(state);
                 request.addAddress(address);
             }
 
-            if(request.getRequestItemList().get(0).getId() == null){
-                RequestItem requestItem = request.getRequestItemList().get(0);
-                request.setRequestItemList(new ArrayList<RequestItem>());
-                Item item = itemSerive.findByName(requestItem.getItem().getName()).get();
-
-                RequestItem requestItemNew = new RequestItem();
-                requestItemNew.setValue(requestItem.getValue());
-                requestItemNew.addItem(item); 
-
-                request.setRequestItemList(new ArrayList<RequestItem>());
-                request.addToList(requestItemNew);
-
+            if(request.getRequestItemList().get(0).getValue()  != requestOld.getRequestItemList().get(0).getValue()){
+                // System.out.println("Entrou no if");
+                requestOld.getRequestItemList().get(0).setValue(request.getRequestItemList().get(0).getValue());
             }
 
-            State state = stateService.findById(request.getAddress().getState().getId()).get();
-            request.getAddress().addState(state);
+            if(request.getRequestItemList().get(0).getItem().getId() != requestOld.getRequestItemList().get(0).getItem().getId()){
+                Integer id = request.getRequestItemList().get(0).getItem().getId();
+                Item item = itemSerive.findById(id).get();
+                RequestItem requestItem = requestOld.getRequestItemList().get(0);
+                requestItem.setItem(item);;
+            }
+    
+            requestOld.freightCalculation();
 
-            FreightFactor freightFactor = freightFactorService.findByRoute(request.getOriginState(), state.getInitials()).get();
-
-            request.addFactor(freightFactor);
-
-            request.freightCalculation();
+            service.save(requestOld);
+                
+        }else{
+            service.save(request);
         }
 
-        service.save(request);
-        
         redirect.addFlashAttribute("message", message);
         return "redirect:/request";
         

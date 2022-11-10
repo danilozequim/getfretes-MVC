@@ -143,4 +143,14 @@ public class Request {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return "Request [id=" + id + ", percentage=" + percentage + ", originState=" + originState + ", freightValue="
+                + freightValue + ", inclusionDate=" + inclusionDate + ", status=" + status.getStatus() + ", userClient="
+                + userClient.getName() + ", userTransporter=" + userTransporter.getName() + ", address=" + address + ", factor=" + factor.getValue()
+                + ", requestItemList=" + requestItemList + ", statusList=" + statusList + "]";
+    }
+
+    
+
 }

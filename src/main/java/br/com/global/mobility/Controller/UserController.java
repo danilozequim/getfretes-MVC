@@ -48,6 +48,8 @@ public class UserController {
     @GetMapping("login")
     public ResponseEntity<User> login(@RequestParam String email,@RequestParam String password){
         password = passwordEncoder.encode(password);
+        System.out.println(email);
+        System.out.println(password);
         return ResponseEntity.of(service.login(email,password));
     }
 
@@ -71,6 +73,27 @@ public class UserController {
             User user = optional.get();
             BeanUtils.copyProperties(newUser, user, new String [] {"id", "password"});
             user.setId(id);
+    
+            service.save(user);
+    
+            return ResponseEntity.ok(user);
+
+        }
+        
+    }
+
+    @PutMapping("admin")
+    public ResponseEntity<User> update(){
+        Optional<User> optional = service.findById(13);
+
+        if (optional.isEmpty()){
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        
+        }else{
+
+            User user = optional.get();
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
     
             service.save(user);
     
