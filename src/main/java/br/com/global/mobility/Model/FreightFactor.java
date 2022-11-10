@@ -42,11 +42,11 @@ public class FreightFactor {
 
     @ManyToOne
     @JoinColumn(name="ID_ESTADO_ORIGEM")
-    private State stateOrigin;
+    private State stateOrigin = new State();
 
     @ManyToOne
     @JoinColumn(name="ID_ESTADO_DESTINO")
-    private State stateDestination;
+    private State stateDestination = new State();
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy="factor", cascade = CascadeType.ALL)

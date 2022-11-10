@@ -1,5 +1,6 @@
 package br.com.global.mobility.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -33,6 +34,11 @@ public class ItemController {
     @GetMapping
     public Page<Item> index( @PageableDefault(size = 10, sort = "id") Pageable pageable){
         return service.listAll(pageable);
+    }
+
+    @GetMapping("itens")
+    public ResponseEntity<List<String>> listAllNames(){
+        return ResponseEntity.of(service.listAllNames());   
     }
 
     @GetMapping("{id}")

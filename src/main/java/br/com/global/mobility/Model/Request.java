@@ -39,6 +39,9 @@ public class Request {
     @Column(name="VL_PERC_FRETE")
     private Float percentage = FreightPercentage.getPercentage();
 
+    @Transient
+    private String originState;
+
     @Column(name="VL_FRETE")
     private Float freightValue;
 
@@ -46,23 +49,23 @@ public class Request {
     private LocalDateTime inclusionDate;
 
     @Transient
-    private Status status;
+    private Status status = new Status();
 
     @ManyToOne
     @JoinColumn(name="ID_USUARIO_CLIENTE")
-    private User userClient;
+    private User userClient = new User();
 
     @ManyToOne
     @JoinColumn(name="ID_USUARIO_PRESTADOR")
-    private User userTransporter;
+    private User userTransporter = new User();
 
     @ManyToOne
     @JoinColumn(name="ID_ENDERECO")
-    private Address address;
+    private Address address = new Address();
 
     @ManyToOne
     @JoinColumn(name="ID_MULTIPLICADOR")
-    private FreightFactor factor;
+    private FreightFactor factor = new FreightFactor();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy="request", cascade = CascadeType.ALL)
     private List<RequestItem> requestItemList = new ArrayList<RequestItem>();
@@ -139,5 +142,5 @@ public class Request {
 
         return null;
     }
-    
+
 }

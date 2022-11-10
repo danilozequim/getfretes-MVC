@@ -51,11 +51,11 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name="ID_ESTADO")
-    private State state;
+    private State state = new State();
 
     @ManyToOne
     @JoinColumn(name="ID_USUARIO")
-    private User user;
+    private User user = new User();
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy="address", cascade = CascadeType.ALL)

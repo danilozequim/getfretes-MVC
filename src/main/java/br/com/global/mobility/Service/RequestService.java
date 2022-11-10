@@ -44,9 +44,9 @@ public class RequestService {
 
     public Optional<List<Request>> listByUser(User user){
 
-        if(user.getType() == EN_User.cliente){
+        if(user.getType() == EN_User.CLIENTE){
             return repository.listForClient(user.getId());
-        }else if(user.getType() == EN_User.prestador){
+        }else if(user.getType() == EN_User.PRESTADOR){
             return repository.listForTransporter(user.getId());
         }else{
             return repository.listForAdmin(user.getId());

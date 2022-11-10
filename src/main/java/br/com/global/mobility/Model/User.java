@@ -18,8 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,16 +44,13 @@ public class User implements UserDetails{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name="FL_TIPO_USUARIO")
     private EN_User type;
 
-    @NotBlank
     @Column(name="DS_EMAIL", unique = true)
     private String email;
 
-    @NotBlank
     @JsonProperty(access = Access.WRITE_ONLY)
     @Column(name="DS_SENHA")
     private String password;
@@ -110,7 +105,7 @@ public class User implements UserDetails{
     }
 
     public void addToList(Request request){
-        if(this.getType() == EN_User.cliente){
+        if(this.getType() != EN_User.PRESTADOR){
             request.setUserClient(this);
             this.getRequestClientList().add(request);
         }else{

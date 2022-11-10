@@ -30,7 +30,7 @@ public class RequestItem {
     private Integer id;
     
     @Column(name="FL_VALIDO")
-    private Integer valid;
+    private Integer valid = 1;
 
     @Column(name="VL_MENSURADO")
     private Float value;
@@ -41,11 +41,11 @@ public class RequestItem {
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name="ID_PEDIDO")
-    private Request request;
+    private Request request = new Request();
 
     @ManyToOne
     @JoinColumn(name="ID_PRODUTO")
-    private Item item;
+    private Item item = new Item();
 
     public void addRequest(Request request){
         item.addToList(this);

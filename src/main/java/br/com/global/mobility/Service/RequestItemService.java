@@ -1,5 +1,6 @@
 package br.com.global.mobility.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class RequestItemService {
 
     public Page<RequestItem> listAll(Pageable pageable){
         return repository.findAll(pageable);
+    }
+
+    public Optional<List<RequestItem>> listAll(){
+        return repository.listAll();
     }
 
     public Optional<RequestItem> findById(Integer id){

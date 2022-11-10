@@ -68,7 +68,7 @@ public class RequestStatusRelController {
 
         }else{
 
-            Status status = statusService.findByStatus(EN_Status.aceito).get();
+            Status status = statusService.findByStatus(EN_Status.Aceito).get();
             Request request = optional.get();
 
             RequestStatusRel requestStatusRel = new RequestStatusRel();
@@ -94,7 +94,7 @@ public class RequestStatusRelController {
 
         }else{
 
-            Status status = statusService.findByStatus(EN_Status.finalizado).get();
+            Status status = statusService.findByStatus(EN_Status.Finalizado).get();
             Request request = optional.get();
 
             RequestStatusRel requestStatusRel = new RequestStatusRel();

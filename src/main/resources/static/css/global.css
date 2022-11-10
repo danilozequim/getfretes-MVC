@@ -74,6 +74,10 @@ p{
     font-size: 1rem;
 }
 
+select{
+    margin-top: 1rem;
+}
+
 /*====================================================================
 ----------------------------- CLASSES --------------------------------
 ====================================================================*/
@@ -132,6 +136,7 @@ p{
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
 .buttons .button {
@@ -184,7 +189,7 @@ p{
     justify-content: flex-start !important;
     align-items: flex-start !important;
     padding: 2rem;
-    height: 20rem;
+    height: 45rem;
     
 }
 

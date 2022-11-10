@@ -13,7 +13,13 @@ import br.com.global.mobility.Model.State;
 public interface StateRepository extends JpaRepository< State, Integer> {
 
 
+    @Query(value="select * from TblESTADO", nativeQuery = true) 
+    public Optional<List<State>> listAllStates();
+
     @Query(value="select distinct ds_sigla from TblESTADO", nativeQuery = true) 
     public Optional<List<String>> listAllInitial();
+ 
+    @Query(value="select * from TblESTADO where ds_sigla = ?1", nativeQuery = true) 
+    public Optional<State> findByInitials(String initials);
     
 }

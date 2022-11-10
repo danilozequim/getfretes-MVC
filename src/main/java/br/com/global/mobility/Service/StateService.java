@@ -21,12 +21,20 @@ public class StateService {
         return repository.findAll(pageable);
     }
 
+    public List<State> listAllStates(){
+        return repository.listAllStates().get();
+    }
+
     public Optional<List<String>> listAllInitial(){
         return repository.listAllInitial();
     }
 
     public Optional<State> findById(Integer id){
         return repository.findById(id);
+    }
+
+    public Optional<State> findByInitials(String initials){
+        return repository.findByInitials(initials);
     }
 
     public void save(State state){

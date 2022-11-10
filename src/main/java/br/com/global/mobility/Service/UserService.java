@@ -24,6 +24,10 @@ public class UserService {
         return repository.findById(id);
     }
 
+    public Optional<User> findByName(String name){
+        return repository.findByName(name);
+    }
+
     public Optional<User> login(String email, String password){
         return repository.login(email, password);
     }

@@ -56,7 +56,7 @@ public class Vehicle {
 
     @ManyToOne
     @JoinColumn(name="ID_USUARIO")
-    private User user;
+    private User user = new User();
 
     public void addUser(User user){
         user.addToList(this);
